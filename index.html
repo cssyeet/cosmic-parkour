@@ -15,7 +15,8 @@
         "three/examples/jsm/postprocessing/ShaderPass.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/postprocessing/ShaderPass.js",
         "three/examples/jsm/postprocessing/UnrealBloomPass.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/postprocessing/UnrealBloomPass.js",
         "three/examples/jsm/shaders/CopyShader.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/shaders/CopyShader.js",
-        "three/examples/jsm/shaders/LuminosityHighPassShader.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/shaders/LuminosityHighPassShader.js"
+        "three/examples/jsm/shaders/LuminosityHighPassShader.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/shaders/LuminosityHighPassShader.js",
+        "ethers": "https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.esm.js"
       }
     }
     </script>
@@ -29,6 +30,10 @@
         <div class="title-container">
             <h1 class="title glitch" data-text="COSMIC PARKOUR">COSMIC PARKOUR</h1>
             <div class="subtitle">A GRAVITY-DEFYING JOURNEY</div>
+            <div id="wallet-container" class="wallet-container">
+                <button id="connect-wallet" class="glass-button">CONNECT WALLET</button>
+                <div id="wallet-address" class="wallet-address hidden"></div>
+            </div>
             <button id="start-button" class="glass-button">BEGIN RUN</button>
         </div>
     </div>
@@ -69,6 +74,8 @@
     </div>
 
     <!-- Game Scripts as modules -->
+    <script type="module" src="./blockchain/frontend-snippet.js"></script>
+    <script type="module" src="./blockchain.js"></script>
     <script type="module" src="./utils.js"></script>
     <script type="module" src="./world.js"></script>
     <script type="module" src="./player.js"></script>

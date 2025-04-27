@@ -8,10 +8,12 @@ import { MapDesigner } from './mapDesigner.js';
 // Game class
 class Game {
     constructor() {
+        console.log('Game constructor called');
         this.init();
     }
 
     init() {
+        console.log('Game init called');
         // Create scene
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x87CEEB); // Sky blue background
@@ -61,6 +63,7 @@ class Game {
         this.scene.add(debugSphere);
 
         // Initialize game components
+        console.log('Initializing game components');
         this.world = new World(this.scene);
         this.player = new PlayerController(this.camera, this.scene, this.world);
         this.ui = new UIManager(this);
@@ -82,9 +85,9 @@ class Game {
         this.postProcessing = null;
 
         // Game state
-        this.isRunning = true;
+        this.isRunning = false;
         this.isPaused = false;
-        this.startTime = performance.now();
+        this.startTime = 0;
         this.platformsPassed = 0;
         this.lastTime = 0;
         this.currentLevel = 1;
@@ -98,15 +101,12 @@ class Game {
         // Handle window resize
         window.addEventListener('resize', () => this.onWindowResize());
 
-        // Hide start screen and show HUD
-        document.getElementById('start-screen').classList.add('hidden');
-        document.getElementById('hud').classList.remove('hidden');
-
         // Start animation loop
         this.animate();
     }
 
     startGame() {
+        console.log('Game started');
         this.isRunning = true;
         this.isPaused = false;
         this.startTime = performance.now();
@@ -183,9 +183,9 @@ class Game {
     }
 }
 
-// Create and start the game
+// Create the game instance
+console.log('Creating game instance');
 const game = new Game();
-game.startGame();
 
 // Debug: Log key events
 document.addEventListener('keydown', (e) => { console.log('keydown', e.code); });
