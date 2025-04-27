@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <title>Cosmic Parkour</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js",
+        "three/examples/jsm/postprocessing/EffectComposer.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/postprocessing/EffectComposer.js",
+        "three/examples/jsm/postprocessing/RenderPass.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/postprocessing/RenderPass.js",
+        "three/examples/jsm/postprocessing/ShaderPass.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/postprocessing/ShaderPass.js",
+        "three/examples/jsm/postprocessing/UnrealBloomPass.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "three/examples/jsm/shaders/CopyShader.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/shaders/CopyShader.js",
+        "three/examples/jsm/shaders/LuminosityHighPassShader.js": "https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/shaders/LuminosityHighPassShader.js"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Main Game Container -->
+    <div id="game-container"></div>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen">
+        <div class="title-container">
+            <h1 class="title glitch" data-text="COSMIC PARKOUR">COSMIC PARKOUR</h1>
+            <div class="subtitle">A GRAVITY-DEFYING JOURNEY</div>
+            <button id="start-button" class="glass-button">BEGIN RUN</button>
+        </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pause-screen" class="screen hidden">
+        <div class="menu-container">
+            <h2>PAUSED</h2>
+            <button id="resume-button" class="glass-button">RESUME</button>
+            <button id="restart-button" class="glass-button">RESTART</button>
+        </div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="end-screen" class="screen hidden">
+        <div class="menu-container">
+            <h2>RUN COMPLETE</h2>
+            <div id="final-time" class="time-display">00:00.000</div>
+            <div id="platforms-count" class="stats-display">0 PLATFORMS</div>
+            <button id="play-again-button" class="glass-button">RUN AGAIN</button>
+        </div>
+    </div>
+
+    <!-- In-Game HUD -->
+    <div id="hud" class="hidden">
+        <div class="hud-top">
+            <div id="timer" class="time-display">00:00.000</div>
+            <div id="platform-counter" class="stats-display">PLATFORMS: 0</div>
+        </div>
+        <div class="hud-center">
+            <div class="crosshair"></div>
+        </div>
+        <div class="hud-bottom">
+            <div class="stamina-container">
+                <div id="stamina-bar" class="stamina-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts as modules -->
+    <script type="module" src="./utils.js"></script>
+    <script type="module" src="./world.js"></script>
+    <script type="module" src="./player.js"></script>
+    <script type="module" src="./effects.js"></script>
+    <script type="module" src="./ui.js"></script>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

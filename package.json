@@ -1,0 +1,19 @@
+{
+  "name": "cosmic-parkour",
+  "version": "1.0.0",
+  "description": "A cosmic parkour game using Three.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.132.2"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
