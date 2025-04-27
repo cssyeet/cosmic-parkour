@@ -89,16 +89,13 @@ export class UIManager {
         console.log('Start button element:', startButton);
         startButton.addEventListener('click', () => {
             console.log('Start button clicked');
-            if (this.isWalletConnected) {
-                document.getElementById('start-screen').classList.add('hidden');
-                document.getElementById('hud').classList.remove('hidden');
-                this.game.startGame();
-            } else {
-                alert('Please connect your wallet first!');
-            }
+            // Allow starting without a wallet connection
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('hud').classList.remove('hidden');
+            this.game.startGame();
         });
 
-        // Wallet connection
+        // Wallet connection (optional now)
         const connectButton = document.getElementById('connect-wallet');
         const walletAddress = document.getElementById('wallet-address');
         console.log('Connect button element:', connectButton);
@@ -176,5 +173,46 @@ export class UIManager {
 
     updateStaminaBar(stamina) {
         document.getElementById('stamina-bar').style.width = `${stamina * 100}%`;
+    }
+
+    updateScore(score) {
+        const el = document.getElementById('score');
+        if (el) {
+            el.textContent = score;
+        } else {
+            console.log('Score element not found');
+        }
+    }
+
+    updateCoins(coins) {
+        const el = document.getElementById('coins');
+        if (el) {
+            el.textContent = coins;
+        } else {
+            console.log('Coins element not found');
+        }
+    }
+
+    updatePlatformCounter(count) {
+        const counterEl = document.getElementById('platform-counter');
+        const valueEl = document.getElementById('platforms');
+        
+        if (valueEl) {
+            valueEl.textContent = count;
+        } else if (counterEl) {
+            // Fallback to the old structure if needed
+            counterEl.textContent = `PLATFORMS: ${count}`;
+        } else {
+            console.log('Platform counter element not found');
+        }
+    }
+
+    updateDifficulty(level) {
+        const el = document.getElementById('difficulty');
+        if (el) {
+            el.textContent = `DIFFICULTY: ${level}`;
+        } else {
+            console.log('Difficulty element not found');
+        }
     }
 } 

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data:;">
     <title>Cosmic Parkour</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
     <script type="importmap">
     {
       "imports": {
@@ -61,7 +62,9 @@
     <div id="hud" class="hidden">
         <div class="hud-top">
             <div id="timer" class="time-display">00:00.000</div>
-            <div id="platform-counter" class="stats-display">PLATFORMS: 0</div>
+            <div id="platform-counter" class="stats-display">PLATFORMS: <span id="platforms">0</span></div>
+            <div id="score-display" class="stats-display">SCORE: <span id="score">0</span></div>
+            <div id="coins-display" class="stats-display">COINS: <span id="coins">0</span></div>
         </div>
         <div class="hud-center">
             <div class="crosshair"></div>
@@ -70,6 +73,7 @@
             <div class="stamina-container">
                 <div id="stamina-bar" class="stamina-bar"></div>
             </div>
+            <div class="controls-hint">Press V to toggle character visibility</div>
         </div>
     </div>
 

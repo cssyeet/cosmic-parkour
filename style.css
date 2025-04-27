@@ -1,14 +1,21 @@
-/* Base Styles */
+/* Space-Themed, Starry, Dark Aesthetic */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Orbitron', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 body {
     overflow: hidden;
-    background-color: #000;
+    background: #0a0e1a;
+    /* Starfield background */
+    background-image: 
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px),
+        linear-gradient(180deg, #0a0e1a 0%, #1a223a 100%);
+    background-size: 120px 120px, 200px 200px, 100% 100%;
+    background-position: 0 0, 60px 60px, 0 0;
 }
 
 #game-container {
@@ -18,6 +25,16 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
+    /* Add a subtle star twinkle animation overlay */
+    pointer-events: none;
+}
+
+/* Star overlay (optional, for more stars) */
+#star-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Screen Overlays */
@@ -30,10 +47,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(16px) brightness(0.8);
     z-index: 100;
-    color: white;
+    color: #e0e6ff;
+    box-shadow: 0 0 40px 10px #0ff2, 0 0 80px 20px #00f2fe33;
 }
 
 .screen.hidden {
@@ -48,20 +66,23 @@ body {
 
 .title {
     font-size: 5rem;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 0.5rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: #aaf6ff;
+    text-shadow: 0 0 24px #00f2fe, 0 0 40px #0ff2, 0 0 80px #00f2fe33;
     position: relative;
+    filter: brightness(1.2);
 }
 
 .subtitle {
     font-size: 1.2rem;
     letter-spacing: 0.3rem;
     margin-bottom: 3rem;
-    opacity: 0.8;
+    opacity: 0.85;
+    color: #b0b8ff;
+    text-shadow: 0 0 8px #00f2fe99;
 }
 
 /* Menu Styles */
@@ -77,33 +98,37 @@ body {
     font-size: 3rem;
     letter-spacing: 0.3rem;
     margin-bottom: 1rem;
+    color: #7eeeff;
+    text-shadow: 0 0 12px #00f2fe, 0 0 24px #0ff2;
 }
 
-/* Glass Button Styles */
+/* Glass/Neon Button Styles */
 .glass-button {
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.1rem;
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e6ff;
+    background: rgba(20, 30, 60, 0.4);
+    border: 2px solid #00f2fe99;
     border-radius: 50px;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 0 16px #00f2fe55, 0 0 32px #0ff2;
+    backdrop-filter: blur(12px) brightness(1.1);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
     text-transform: uppercase;
     outline: none;
 }
 
 .glass-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 242, 254, 0.15);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 32px #00f2fe99, 0 0 64px #0ff2;
+    color: #fff;
 }
 
 .glass-button:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.98);
 }
 
 /* HUD Styles */
@@ -143,49 +168,101 @@ body {
 
 /* Crosshair Styles */
 .crosshair {
+    position: relative;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    background-color: #00f2fe;
+    box-shadow: 0 0 10px #00f2fe, 0 0 20px #0ff2;
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: '';
+    position: absolute;
+    background-color: #00f2fe;
+    box-shadow: 0 0 6px #00f2fe, 0 0 12px #0ff2;
+}
+
+.crosshair::before {
+    width: 20px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.crosshair::after {
+    width: 2px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Timer and Stats */
 .time-display {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.1rem;
-    color: white;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    color: #aaf6ff;
+    text-shadow: 0 0 8px #00f2fe, 0 0 16px #0ff2;
 }
 
 .stats-display {
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.05rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: #b0b8ff;
+    text-shadow: 0 0 4px #00f2fe99;
 }
 
 /* Stamina Bar */
 .stamina-container {
     width: 200px;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(20, 30, 60, 0.7);
     border-radius: 4px;
     overflow: hidden;
+    border: 1px solid #00f2fe33;
+    box-shadow: 0 0 8px #00f2fe55;
 }
 
 .stamina-bar {
     height: 100%;
     width: 100%;
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(90deg, #00f2fe, #7eeeff);
     border-radius: 4px;
-    transition: width 0.2s ease;
+    transition: width 0.2s ease-out;
+}
+
+/* Controls Hint */
+.controls-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #b0b8ff;
+    opacity: 0.8;
+    text-shadow: 0 0 4px #00f2fe99;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(10, 14, 26, 0.6);
+    border-radius: 4px;
+    border: 1px solid #00f2fe33;
+    animation: pulseFade 3s infinite;
+}
+
+@keyframes pulseFade {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.4; }
 }
 
 /* Glitch Effect */
 .glitch {
     position: relative;
+    color: #fff;
+    text-shadow: 0 0 8px #00f2fe, 0 0 16px #0ff2;
 }
 
 .glitch::before, .glitch::after {
@@ -196,33 +273,70 @@ body {
     width: 100%;
     height: 100%;
     opacity: 0.8;
+    color: #7eeeff;
+    text-shadow: 0 0 16px #00f2fe, 0 0 32px #0ff2;
 }
 
-.glitch::before {
-    color: #0ff;
-    z-index: -1;
-    animation: glitch-effect 3s infinite;
+/* Wallet and Blockchain UI (space style) */
+.wallet-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    background: rgba(20, 30, 60, 0.5);
+    border-radius: 16px;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 16px #00f2fe55;
 }
 
-.glitch::after {
-    color: #f0f;
-    z-index: -2;
-    animation: glitch-effect 2s infinite reverse;
+.wallet-address {
+    color: #7eeeff;
+    font-size: 1rem;
+    font-family: 'Orbitron', 'Segoe UI', system-ui, sans-serif;
+    background: rgba(0, 242, 254, 0.08);
+    border-radius: 8px;
+    padding: 0.2rem 0.8rem;
+    box-shadow: 0 0 8px #00f2fe33;
 }
+
+.wallet-address.connected {
+    color: #00f2fe;
+    background: rgba(0, 242, 254, 0.18);
+    box-shadow: 0 0 16px #00f2fe99;
+}
+
+#connect-wallet {
+    background: linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%);
+    color: #fff;
+    border: 2px solid #00f2fe99;
+    border-radius: 50px;
+    padding: 0.7rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 16px #00f2fe55;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
+}
+
+#connect-wallet:hover {
+    background: linear-gradient(90deg, #00f2fe 0%, #0a0e1a 100%);
+    color: #7eeeff;
+    box-shadow: 0 0 32px #00f2fe99;
+}
+
+#connect-wallet.connected {
+    background: #0a0e1a;
+    color: #00f2fe;
+    border: 2px solid #00f2fe;
+    box-shadow: 0 0 32px #00f2fe99;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
 
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes glitch-effect {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
 }
 
 /* Responsive Adjustments */
@@ -247,47 +361,4 @@ body {
     .time-display {
         font-size: 1.2rem;
     }
-}
-
-.wallet-container {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.wallet-address {
-    font-family: 'Courier New', monospace;
-    font-size: 0.8em;
-    color: #00ff00;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 8px 12px;
-    border-radius: 4px;
-    max-width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.wallet-address.connected {
-    border: 1px solid #00ff00;
-}
-
-#connect-wallet {
-    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-    border: 1px solid #00ff00;
-    color: #00ff00;
-    transition: all 0.3s ease;
-}
-
-#connect-wallet:hover {
-    background: linear-gradient(45deg, #2a2a2a, #3a3a3a);
-    box-shadow: 0 0 10px #00ff00;
-}
-
-#connect-wallet.connected {
-    background: linear-gradient(45deg, #00ff00, #00cc00);
-    color: #000;
-    border: 1px solid #000;
 }

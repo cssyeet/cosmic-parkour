@@ -26,7 +26,9 @@ export class SoundManager {
         const soundFiles = {
             wallRun: 'sounds/wall_run.wav',
             death: 'sounds/death.wav',
-            footstep: 'sounds/footstep.wav'
+            footstep: 'sounds/footstep.wav',
+            jump: 'sounds/jump.wav',
+            coin: 'sounds/coin.wav'
         };
 
         for (const [name, path] of Object.entries(soundFiles)) {
@@ -104,6 +106,14 @@ export class SoundManager {
 
     playDeath() {
         this.playSound('death', { volume: 0.8, pitch: 0.8 });
+    }
+
+    playJump() {
+        this.playSound('jump', { volume: 0.5, pitch: 1.0 });
+    }
+    
+    playCoinSound() {
+        this.playSound('coin', { volume: 0.6, pitch: 1.2 });
     }
 
     playFootstep(isRunning = false) {

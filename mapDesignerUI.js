@@ -15,11 +15,11 @@ export class MapDesignerUI {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(10, 14, 26, 0.92);
             padding: 20px;
-            border-radius: 10px;
-            color: white;
-            font-family: Arial, sans-serif;
+            border-radius: 16px;
+            color: #aaf6ff;
+            font-family: "'Orbitron', 'Segoe UI', system-ui, sans-serif";
             z-index: 1000;
             display: none;
         `;
@@ -30,7 +30,7 @@ export class MapDesignerUI {
         title.style.cssText = `
             margin: 0 0 20px 0;
             font-size: 24px;
-            color: #fff;
+            color: #7eeeff;
             text-align: center;
         `;
         this.container.appendChild(title);
@@ -74,7 +74,7 @@ export class MapDesignerUI {
         sectionTitle.style.cssText = `
             margin: 0 0 10px 0;
             font-size: 18px;
-            color: #fff;
+            color: #aaf6ff;
         `;
         section.appendChild(sectionTitle);
 
@@ -102,15 +102,16 @@ export class MapDesignerUI {
             button.textContent = `${prefab.name} (${prefab.key})`;
             button.style.cssText = `
                 padding: 10px;
-                background: rgba(255, 255, 255, 0.2);
-                border: none;
-                border-radius: 5px;
-                color: white;
+                background: linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%);
+                border: 2px solid #00f2fe99;
+                border-radius: 50px;
+                color: #e0e6ff;
                 cursor: pointer;
                 transition: background 0.3s;
+                font-family: "'Orbitron', 'Segoe UI', system-ui, sans-serif";
             `;
-            button.onmouseover = () => button.style.background = 'rgba(255, 255, 255, 0.3)';
-            button.onmouseout = () => button.style.background = 'rgba(255, 255, 255, 0.2)';
+            button.onmouseover = () => button.style.background = 'linear-gradient(90deg, #00f2fe 0%, #0a0e1a 100%)';
+            button.onmouseout = () => button.style.background = 'linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%)';
             button.onclick = () => this.mapDesigner.selectedPrefab = prefab.type;
             buttonContainer.appendChild(button);
         });
@@ -137,7 +138,7 @@ export class MapDesignerUI {
             const label = document.createElement('label');
             label.textContent = control.name;
             label.style.cssText = `
-                color: white;
+                color: #aaf6ff;
                 margin-right: 10px;
             `;
 
@@ -151,6 +152,8 @@ export class MapDesignerUI {
                 input.step = control.step;
                 input.style.cssText = `
                     width: 150px;
+                    background: rgba(20, 30, 60, 0.4);
+                    border-radius: 8px;
                 `;
                 input.onchange = (e) => {
                     if (control.name === 'Grid Size') {
@@ -195,15 +198,16 @@ export class MapDesignerUI {
             button.textContent = control.name;
             button.style.cssText = `
                 padding: 10px;
-                background: rgba(255, 255, 255, 0.2);
-                border: none;
-                border-radius: 5px;
-                color: white;
+                background: linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%);
+                border: 2px solid #00f2fe99;
+                border-radius: 50px;
+                color: #e0e6ff;
                 cursor: pointer;
                 transition: background 0.3s;
+                font-family: "'Orbitron', 'Segoe UI', system-ui, sans-serif";
             `;
-            button.onmouseover = () => button.style.background = 'rgba(255, 255, 255, 0.3)';
-            button.onmouseout = () => button.style.background = 'rgba(255, 255, 255, 0.2)';
+            button.onmouseover = () => button.style.background = 'linear-gradient(90deg, #00f2fe 0%, #0a0e1a 100%)';
+            button.onmouseout = () => button.style.background = 'linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%)';
             button.onclick = () => {
                 if (control.key === 'Delete') {
                     this.mapDesigner.deleteSelectedObject();
@@ -227,30 +231,32 @@ export class MapDesignerUI {
         saveButton.textContent = 'Save Map';
         saveButton.style.cssText = `
             padding: 10px;
-            background: rgba(0, 255, 0, 0.2);
-            border: none;
-            border-radius: 5px;
-            color: white;
+            background: linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%);
+            border: 2px solid #00f2fe99;
+            border-radius: 50px;
+            color: #e0e6ff;
             cursor: pointer;
             transition: background 0.3s;
+            font-family: "'Orbitron', 'Segoe UI', system-ui, sans-serif";
         `;
-        saveButton.onmouseover = () => saveButton.style.background = 'rgba(0, 255, 0, 0.3)';
-        saveButton.onmouseout = () => saveButton.style.background = 'rgba(0, 255, 0, 0.2)';
+        saveButton.onmouseover = () => saveButton.style.background = 'linear-gradient(90deg, #00f2fe 0%, #0a0e1a 100%)';
+        saveButton.onmouseout = () => saveButton.style.background = 'linear-gradient(90deg, #0a0e1a 0%, #00f2fe 100%)';
         saveButton.onclick = () => this.mapDesigner.saveMap();
 
         const loadButton = document.createElement('button');
         loadButton.textContent = 'Load Map';
         loadButton.style.cssText = `
             padding: 10px;
-            background: rgba(0, 0, 255, 0.2);
-            border: none;
-            border-radius: 5px;
-            color: white;
+            background: linear-gradient(90deg, #0a0e1a 0%, #7eeeff 100%);
+            border: 2px solid #7eeeff99;
+            border-radius: 50px;
+            color: #e0e6ff;
             cursor: pointer;
             transition: background 0.3s;
+            font-family: "'Orbitron', 'Segoe UI', system-ui, sans-serif";
         `;
-        loadButton.onmouseover = () => loadButton.style.background = 'rgba(0, 0, 255, 0.3)';
-        loadButton.onmouseout = () => loadButton.style.background = 'rgba(0, 0, 255, 0.2)';
+        loadButton.onmouseover = () => loadButton.style.background = 'linear-gradient(90deg, #7eeeff 0%, #0a0e1a 100%)';
+        loadButton.onmouseout = () => loadButton.style.background = 'linear-gradient(90deg, #0a0e1a 0%, #7eeeff 100%)';
         loadButton.onclick = () => this.mapDesigner.loadMap();
 
         buttonContainer.appendChild(saveButton);

@@ -140,4 +140,79 @@ function writeString(view, offset, string) {
     for (let i = 0; i < string.length; i++) {
         view.setUint8(offset + i, string.charCodeAt(i));
     }
-} 
+}
+
+// Simple script to generate coin collection sound
+// Run this in a browser console to generate audio files
+
+// Function to create an AudioContext
+function createAudioContext() {
+    return new (window.AudioContext || window.webkitAudioContext)();
+}
+
+// Function to generate a coin collection sound
+function generateCoinSound() {
+    const audioCtx = createAudioContext();
+    const duration = 0.5; // seconds
+    
+    // Create oscillator and gain node
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
+    oscillator.frequency.exponentialRampToValueAtTime(1800, audioCtx.currentTime + 0.2);
+    
+    // Envelope
+    gainNode.gain.setValueAtTime(0.0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.7, audioCtx.currentTime + 0.05);
+    gainNode.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + duration);
+    
+    // Connect nodes
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    // Start and stop
+    oscillator.start(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime + duration);
+    
+    // Return a promise that resolves when rendering is complete
+    return audioCtx.startRendering();
+}
+
+// Function to download the generated audio
+function downloadAudio(audioBuffer, filename) {
+    const audioData = audioBufferToWav(audioBuffer);
+    const blob = new Blob([audioData], { type: 'audio/wav' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    
+    URL.revokeObjectURL(url);
+}
+
+// Helper function to convert AudioBuffer to WAV format
+function audioBufferToWav(audioBuffer) {
+    // Implementation omitted - you would need a full WAV encoder here
+    // This would be replaced by an actual WAV encoder implementation
+    // For this example, we'll assume it exists
+}
+
+// Generate and download the sounds
+async function generateSounds() {
+    try {
+        console.log('Generating coin sound...');
+        const coinBuffer = await generateCoinSound();
+        downloadAudio(coinBuffer, 'coin.wav');
+        console.log('Coin sound generated and downloaded');
+    } catch (error) {
+        console.error('Error generating sounds:', error);
+    }
+}
+
+// Export for use in the browser
+window.generateSounds = generateSounds; 
